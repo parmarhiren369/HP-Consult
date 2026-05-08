@@ -30,7 +30,7 @@ const App = () => (
             <div className="flex-1 flex flex-col min-w-0">
               <header className="h-14 flex items-center border-b bg-card/80 backdrop-blur-xl sticky top-0 z-10 px-4">
                 <SidebarTrigger />
-                <span className="ml-3 font-heading font-semibold text-sm text-muted-foreground">Amiya Consultant</span>
+                <span className="ml-3 font-heading font-semibold text-sm text-muted-foreground">HP Consult</span>
               </header>
               <main className="flex-1 overflow-auto">
                 <Routes>

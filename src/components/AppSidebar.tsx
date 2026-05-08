@@ -39,8 +39,8 @@ export function AppSidebar() {
               <Shield className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-heading font-bold text-sidebar-foreground text-lg leading-tight">Amiya</h1>
-              <p className="text-xs text-sidebar-foreground/60">Consultant</p>
+              <h1 className="font-heading font-bold text-sidebar-foreground text-lg leading-tight">HP</h1>
+              <p className="text-xs text-sidebar-foreground/60">Consult</p>
             </div>
           </div>
         ) : (

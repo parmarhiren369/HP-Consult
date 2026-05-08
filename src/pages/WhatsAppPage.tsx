@@ -38,7 +38,7 @@ export default function WhatsAppPage() {
   }, [now]);
 
   const defaultMessage = (name: string, policyNo: string, endDate: string, premium: number) =>
-    `Dear ${name},\n\nThis is a reminder from *Amiya Consultant* that your insurance policy (${policyNo}) is due for renewal on ${endDate}.\n\nPremium Amount: ₹${premium.toLocaleString()}\n\nPlease contact us for renewal assistance.\n\nThank you! 🙏`;
+    `Dear ${name},\n\nThis is a reminder from *HP Consult* that your insurance policy (${policyNo}) is due for renewal on ${endDate}.\n\nPremium Amount: ₹${premium.toLocaleString()}\n\nPlease contact us for renewal assistance.\n\nThank you! 🙏`;
 
   const sendWhatsApp = (phone: string, message: string) => {
     if (!phone) { toast.error("No phone number available"); return; }

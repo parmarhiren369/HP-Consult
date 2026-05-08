@@ -61,7 +61,7 @@ export default function DashboardPage() {
   }, [clients]);
 
   return (
-    <PageWrapper title="Dashboard" subtitle="Welcome to Amiya Consultant">
+    <PageWrapper title="Dashboard" subtitle="Welcome to HP Consult">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Clients" value={clients.length} icon={Users} color="primary" />
         <StatCard title="Mediclaim" value={mediclaim.length} icon={Shield} color="secondary" />
