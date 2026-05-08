@@ -1,68 +1,76 @@
 import { Client, Lead, Target } from './types';
-// Firebase connection disabled
-// import { db } from './firebase';
-// import {
-//   collection,
-//   deleteDoc,
-//   getDoc,
-//   doc,
-//   getDocs,
-//   setDoc,
-// } from 'firebase/firestore';
+import { db } from './firebase';
+import {
+  collection,
+  deleteDoc,
+  getDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from 'firebase/firestore';
 
-// const CLIENTS_COLLECTION = 'clients';
-// const LEADS_COLLECTION = 'leads';
-// const TARGETS_COLLECTION = 'targets';
-
-// Firebase connection disabled - functions return empty data
-// Uncomment when Firebase is reconnected
+const CLIENTS_COLLECTION = 'clients';
+const LEADS_COLLECTION = 'leads';
+const TARGETS_COLLECTION = 'targets';
 
 export async function getClients(): Promise<Client[]> {
-  console.warn("Firebase disabled: getClients() returning empty array");
-  return [];
+  const snapshot = await getDocs(collection(db, CLIENTS_COLLECTION));
+  const clients = snapshot.docs.map((docItem) => {
+    const data = docItem.data() as Client;
+    console.log("Loaded client from Firestore:", data);
+    return data;
+  });
+  return clients;
 }
 
 export async function getClientById(id: string): Promise<Client | null> {
-  console.warn("Firebase disabled: getClientById() returning null");
-  return null;
+  const snapshot = await getDoc(doc(db, CLIENTS_COLLECTION, id));
+
+  if (!snapshot.exists()) {
+    return null;
+  }
+
+  const client = snapshot.data() as Client;
+  console.log("Loaded client by id from Firestore:", client);
+  return client;
 }
 
 export async function saveClient(client: Client) {
-  console.warn("Firebase disabled: saveClient() - data not persisted", client);
-  // Mock implementation - data not saved
+  console.log("Saving client to Firestore:", client);
+  await setDoc(doc(db, CLIENTS_COLLECTION, client.id), client);
+  console.log("Client saved successfully");
 }
 
 export async function deleteClient(id: string) {
-  console.warn("Firebase disabled: deleteClient() called", id);
-  // Mock implementation - nothing deleted
+  await deleteDoc(doc(db, CLIENTS_COLLECTION, id));
 }
 
 export async function getLeads(): Promise<Lead[]> {
-  console.warn("Firebase disabled: getLeads() returning empty array");
-  return [];
+  const snapshot = await getDocs(collection(db, LEADS_COLLECTION));
+  return snapshot.docs.map((docItem) => docItem.data() as Lead);
 }
 
 export async function saveLead(lead: Lead) {
-  console.warn("Firebase disabled: saveLead() - data not persisted", lead);
-  // Mock implementation - data not saved
+  await setDoc(doc(db, LEADS_COLLECTION, lead.id), lead);
 }
 
 export async function deleteLead(id: string) {
-  console.warn("Firebase disabled: deleteLead() called", id);
-  // Mock implementation - nothing deleted
+  await deleteDoc(doc(db, LEADS_COLLECTION, id));
 }
 
 export async function getTargets(): Promise<Target[]> {
-  console.warn("Firebase disabled: getTargets() returning empty array");
-  return [];
+  const snapshot = await getDocs(collection(db, TARGETS_COLLECTION));
+  return snapshot.docs.map((docItem) => docItem.data() as Target);
 }
 
 export async function saveTarget(target: Target) {
-  console.warn("Firebase disabled: saveTarget() - data not persisted", target);
-  // Mock implementation - data not saved
+  await setDoc(doc(db, TARGETS_COLLECTION, target.id), target);
 }
 
 export async function getRenewalsByMonth(month: number, year: number): Promise<Client[]> {
-  console.warn("Firebase disabled: getRenewalsByMonth() returning empty array");
-  return [];
+  const clients = await getClients();
+  return clients.filter(c => {
+    const end = new Date(c.endDate);
+    return end.getMonth() === month && end.getFullYear() === year;
+  });
 }
