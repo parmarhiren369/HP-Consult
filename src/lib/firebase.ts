@@ -15,15 +15,16 @@ const firebaseConfig = {
   measurementId: "G-C0WJP1Q560",
 };
 
-export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+// Firebase connection disabled
+// export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
-export const storage = getStorage(app, `gs://${configuredStorageBucket}`);
+// export const db = getFirestore(app);
+// export const storage = getStorage(app, `gs://${configuredStorageBucket}`);
 
-if (typeof window !== "undefined") {
-  isSupported().then((supported) => {
-    if (supported) {
-      getAnalytics(app);
-    }
-  });
-}
+// if (typeof window !== "undefined") {
+//   isSupported().then((supported) => {
+//     if (supported) {
+//       getAnalytics(app);
+//     }
+//   });
+// }
