@@ -24,6 +24,7 @@ export default function VehicleInsurancePage() {
   const [editingClientId, setEditingClientId] = useState<string | null>(null);
   const [form, setForm] = useState({
     company: '' as VehicleInsuranceCompany, name: '', policyNumber: '', premium: '',
+    mobile: '',
     vehicleNumber: '', chassisNumber: '', vehicleModel: '',
     insuranceType: '' as VehicleInsuranceType, startDate: '', endDate: '',
   });
@@ -71,6 +72,7 @@ export default function VehicleInsurancePage() {
       name: client.name,
       policyNumber: client.policyNumber,
       premium: String(client.premium),
+      mobile: client.mobile,
       vehicleNumber: client.vehicleNumber,
       chassisNumber: client.chassisNumber,
       vehicleModel: client.vehicleModel,
@@ -89,6 +91,7 @@ export default function VehicleInsurancePage() {
       name: '',
       policyNumber: '',
       premium: '',
+      mobile: '',
       vehicleNumber: '',
       chassisNumber: '',
       vehicleModel: '',
@@ -109,7 +112,7 @@ export default function VehicleInsurancePage() {
     const client: VehicleInsuranceClient = {
       id: editingClientId ?? crypto.randomUUID(), type: 'vehicle', company: form.company,
       name: form.name, policyNumber: form.policyNumber, premium: Number(form.premium),
-      mobile: '', email: '', vehicleNumber: form.vehicleNumber,
+      mobile: form.mobile, email: '', vehicleNumber: form.vehicleNumber,
       chassisNumber: form.chassisNumber, vehicleModel: form.vehicleModel,
       insuranceType: form.insuranceType, startDate: form.startDate, endDate: form.endDate,
       documents: docs, createdAt: existingClient?.createdAt ?? new Date().toISOString(),
@@ -143,6 +146,7 @@ export default function VehicleInsurancePage() {
             </div>
             <div className="space-y-2"><Label>Policy Holder Name *</Label><Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Name" /></div>
             <div className="space-y-2"><Label>Policy Number</Label><Input value={form.policyNumber} onChange={e => setForm(f => ({ ...f, policyNumber: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Mobile Number</Label><Input value={form.mobile} onChange={e => setForm(f => ({ ...f, mobile: e.target.value }))} placeholder="Mobile number" /></div>
             <div className="space-y-2"><Label>Vehicle Number *</Label><Input value={form.vehicleNumber} onChange={e => setForm(f => ({ ...f, vehicleNumber: e.target.value }))} placeholder="MH 01 AB 1234" /></div>
             <div className="space-y-2"><Label>Chassis Number</Label><Input value={form.chassisNumber} onChange={e => setForm(f => ({ ...f, chassisNumber: e.target.value }))} /></div>
             <div className="space-y-2"><Label>Vehicle Model</Label><Input value={form.vehicleModel} onChange={e => setForm(f => ({ ...f, vehicleModel: e.target.value }))} /></div>
@@ -266,6 +270,10 @@ export default function VehicleInsurancePage() {
                 <div>
                   <Label className="text-xs text-muted-foreground">Policy Number</Label>
                   <p className="font-medium">{selectedClient.policyNumber}</p>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Mobile Number</Label>
+                  <p className="font-medium">{selectedClient.mobile || '-'}</p>
                 </div>
                 <div>
                   <Label className="text-xs text-muted-foreground">Vehicle Number</Label>
